@@ -23,12 +23,14 @@ function getData(evt) {
 
 form.addEventListener('submit', handleSubmit);
 function handleSubmit(evt) {
-    evt.preventDefault();    
-
-    console.log('Submitted data:', {
+    evt.preventDefault();  
+    
+    const submittedData = {
         email: form.elements.email.value,
         message: form.elements.message.value,
-    });
+        };
+    console.log('Submitted data:', submittedData);
+    
     form.reset();
     localStorage.removeItem(LOCAL_KEY);
 }
