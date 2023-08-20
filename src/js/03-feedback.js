@@ -9,7 +9,9 @@ const savedState = JSON.parse(localStorage.getItem(LOCAL_KEY)) || {};
 form.elements.email.value = savedState.email || '';
 form.elements.message.value = savedState.message || '';
 
-form.addEventListener('input', throttle(getData, 500)); 
+const throttledGetData = throttle(getData, 500);
+
+form.addEventListener('input', throttledGetData);
 
 function getData(evt) {
     const data = {
@@ -21,14 +23,13 @@ function getData(evt) {
 
 form.addEventListener('submit', handleSubmit);
 function handleSubmit(evt) {
-    evt.preventDefault();
-
-    form.reset();
-    localStorage.removeItem(LOCAL_KEY);
+    evt.preventDefault();    
 
     console.log('Submitted data:', {
         email: form.elements.email.value,
         message: form.elements.message.value,
     });
+    form.reset();
+    localStorage.removeItem(LOCAL_KEY);
 }
 
